@@ -1,0 +1,31 @@
+---
+openapi: 3.0.3
+info:
+  title: firsttask API
+  version: 1.0-SNAPSHOT
+paths:
+  /converter:
+    get:
+      tags:
+      - Converter Controller
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - user
+        - admin
+components:
+  securitySchemes:
+    SecurityScheme:
+      type: http
+      description: Authentication
+      scheme: basic

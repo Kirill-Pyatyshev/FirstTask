@@ -1,0 +1,31 @@
+---
+openapi: 3.0.3
+info:
+  title: firsttask API
+  version: 1.0-SNAPSHOT
+paths:
+  /converter:
+    get:
+      tags:
+        - Converter Controller
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnJson'
+      security:
+        - BasicAuth: []
+components:
+  schemas:
+    ReturnJson:
+      Path_original:
+        type: string
+      Path_modified:
+        type: string
+      Parameter_user: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

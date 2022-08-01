@@ -1,0 +1,4 @@
+
+2022-07-26 11:54:10 FATAL [executor-thread-0]: Catch exception class java.nio.file.FileAlreadyExistsException
+2022-08-01 15:43:08 FATAL [executor-thread-0]: Exception: class java.nio.file.FileSystemExceptionError when copying file
+2022-08-01 15:45:35 FATAL [executor-thread-0]: Exception: class java.nio.file.FileSystemExceptionError when copying file
