@@ -1,49 +1,66 @@
-package Service;
+package service;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.*;
+import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @ApplicationScoped
-public  class FileConverterService {
-    private static final Logger logger = Logger.getLogger(FileConverterService.class);
-    private static int Quantity_Processed_Files;
-    public static int getQuantity_Processed_Files() {
-        return Quantity_Processed_Files;
-    }
-    public static void copyFile(String directoryPathOriginal, String directoryPathModified,String Parameter){
+public class FileConverterService {
 
-        final File directory = new File(directoryPathOriginal);
+    private static final Logger logger = Logger.getLogger(FileConverterService.class);
+
+    @ConfigProperty(name = "path.dirOriginal")
+    String pathOriginal;
+    @ConfigProperty(name = "path.dirModified")
+    String pathModified;
+    private int quantityProcessedFiles;
+    private String parameter;
+
+    public void startOfConversion(String parameter){
+        this.parameter = parameter;
+        final File directory = new File(pathOriginal);
         File[] files = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".txt"));
-        Quantity_Processed_Files = files.length;
-        for (File file: files) {
+        quantityProcessedFiles = files.length;
+        Arrays.stream(files).forEach(file -> {
             try {
-                Files.copy(file.toPath(), Path.of(directoryPathModified + file.getName()), StandardCopyOption.REPLACE_EXISTING);
-                convertAndSaveFile(file, directoryPathModified,Parameter);
+                Files.copy(file.toPath(), Path.of(pathModified,file.getName()), StandardCopyOption.REPLACE_EXISTING);
+                convertAndSaveFile(file, parameter);
+            } catch (AccessDeniedException e){
+                logger.fatal("Exception: " + e.getClass() + ". The file " + file.getName() + " is not copied, there is no access,");
+                quantityProcessedFiles--;
             } catch (IOException e) {
-                logger.fatal("Exception: " +e.getClass() + "Error when copying file");
+                logger.fatal("Exception: " + e.getClass() + ". Error when copying file");
             }
-        }
+        });
     }
-    public static void convertAndSaveFile(File file, String directoryPathModified,String Parameter){
+
+    public void convertAndSaveFile(File file, String Parameter){
         int characterСounter = 0;
         int characterCounterWithoutSpaces = 0;
         try {
             BufferedReader reader = new BufferedReader((new FileReader(file)));
-
             String lines;
             while ((lines = reader.readLine()) != null){
                 characterСounter += lines.length();
                 characterCounterWithoutSpaces += lines.replace(" ","").length();
             }
-
-            FileWriter fileWriter = new FileWriter(directoryPathModified + file.getName(), true);
-            StringBuffer sb = new StringBuffer();
+            FileWriter fileWriter = new FileWriter(Path.of(pathModified,file.getName()).toString(), true);
+            StringBuilder sb = new StringBuilder();
 
             sb.append("\n")
                     .append("Количетсво символов:")

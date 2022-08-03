@@ -1,38 +1,42 @@
 package com.converter;
 
-import Service.FileConverterService;
+import service.FileConverterService;
 import io.quarkus.test.junit.QuarkusTest;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import javax.inject.Inject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 public class ConverterTest {
-    @ConfigProperty(name = "path.dirOriginal")
-    String pathOriginal;
+
     @ConfigProperty(name = "path.dirModified")
     String pathModified;
 
+    @Inject
+    FileConverterService fileConverterService;
+
     @org.junit.jupiter.api.Test
-    void testCopyFile() {
+    void testStartOfConversion() {
         final File directory = new File(pathModified);
         final File[] files = directory.listFiles(File::isFile);
 
-        String[] expectedValues = {"Война и мир.txt", "Пустой.txt", "У лукоморья дуб зелёный....txt"};
+        String[] expectedValues = {"Война и мир.txt", "У лукоморья дуб зелёный....txt"};
         try {
-            FileConverterService.copyFile(pathOriginal, pathModified,"");
+            fileConverterService.startOfConversion("");
             for (int i = 0; i < files.length; i++) {
                 assertEquals(files[i].getName(),expectedValues[i]); // Checking the file name
             }
 
             int expectedСountСharacters = 729735;
 
-            BufferedReader reader = new BufferedReader((new FileReader(pathModified + "Война и мир.txt")));
+            BufferedReader reader = new BufferedReader((new FileReader(Path.of(pathModified,"Война и мир.txt").toString())));
 
             String lines;
             while ((lines = reader.readLine()) != null){
