@@ -1,6 +1,6 @@
 package com.converter;
 
-import service.FileConverterService;
+import com.converter.service.FileConverterService;
 import io.quarkus.test.junit.QuarkusTest;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 

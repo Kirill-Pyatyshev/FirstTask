@@ -1,10 +1,9 @@
 package com.converter;
 
+import com.converter.dto.ConvertResultDTO;
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.response.Response;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.Test;
-import service.FileConverterService;
 
 import javax.inject.Inject;
 import java.io.BufferedReader;
@@ -12,7 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,7 +22,7 @@ public class ConvertResourceTest {
     @ConfigProperty(name = "path.dirModified")
     String pathModified;
     @Inject
-    FileConverterService service;
+    ConvertResultDTO convertResultDTO;
 
     @Test
     public void testСonverterEndpointReturnJson() {
@@ -42,18 +40,18 @@ public class ConvertResourceTest {
 
     @Test
     public void testСonverterEndpointReturnJsonV2() {
-        service = given()
+        convertResultDTO = given()
                 .queryParam("Parameter","User auth")
                 .auth().basic("admin", "admin")
                 .when().get("/converter")
                 .then()
                 .statusCode(200)
-                .extract().as(FileConverterService.class);
+                .extract().as(ConvertResultDTO.class);
 
-        assertEquals("User auth", service.getResultDTO().getParameter());
-        assertEquals("src\\test\\resources\\initialData\\", service.getResultDTO().getPathInitialData());
-        assertEquals("src\\test\\resources\\results\\", service.getResultDTO().getPathResult());
-        assertEquals(2, service.getResultDTO().getQuantityProcessedFiles());
+        assertEquals("User auth",convertResultDTO.getParameter());
+        assertEquals("src\\test\\resources\\initialData\\", convertResultDTO.getPathInitialData());
+        assertEquals("src\\test\\resources\\results\\", convertResultDTO.getPathResult());
+        assertEquals(2, convertResultDTO.getQuantityProcessedFiles());
     }
 
     @Test

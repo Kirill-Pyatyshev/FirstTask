@@ -1,10 +1,6 @@
-package service;
+package com.converter.service;
 
-import dto.ConvertResultDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.converter.dto.ConvertResultDTO;
 import org.apache.log4j.Logger;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -26,10 +22,8 @@ public class FileConverterService {
     @ConfigProperty(name = "path.dirModified")
     String pathModified;
     private int quantityProcessedFiles;
-    private String parameter;
 
-    public void startOfConversion(String parameter){
-        this.parameter = parameter;
+    public ConvertResultDTO startOfConversion(String parameter){
         final File directory = new File(pathOriginal);
         File[] files = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".txt"));
         quantityProcessedFiles = files.length;
@@ -44,6 +38,7 @@ public class FileConverterService {
                 logger.fatal("Exception: " + e.getClass() + ". Error when copying file");
             }
         });
+        return new ConvertResultDTO(pathOriginal, pathModified, quantityProcessedFiles, parameter);
     }
 
     public void convertAndSaveFile(File file, String Parameter){
@@ -72,10 +67,5 @@ public class FileConverterService {
         } catch (IOException e) {
             logger.fatal("Exception: " +e.getClass() + "Error when saving the file.");
         }
-    }
-
-    public ConvertResultDTO getResultDTO(){
-        ConvertResultDTO dto = new ConvertResultDTO(pathOriginal, pathModified, quantityProcessedFiles , parameter);
-        return dto;
     }
 }
