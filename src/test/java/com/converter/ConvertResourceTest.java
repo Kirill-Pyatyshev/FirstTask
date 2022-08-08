@@ -50,10 +50,10 @@ public class ConvertResourceTest {
                 .statusCode(200)
                 .extract().as(FileConverterService.class);
 
-        assertEquals("User auth", service.getParameter());
-        assertEquals("src\\test\\resources\\initialData\\", service.getPathOriginal());
-        assertEquals("src\\test\\resources\\results\\", service.getPathModified());
-        assertEquals(2, service.getQuantityProcessedFiles());
+        assertEquals("User auth", service.getResultDTO().getParameter());
+        assertEquals("src\\test\\resources\\initialData\\", service.getResultDTO().getPathInitialData());
+        assertEquals("src\\test\\resources\\results\\", service.getResultDTO().getPathResult());
+        assertEquals(2, service.getResultDTO().getQuantityProcessedFiles());
     }
 
     @Test

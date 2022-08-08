@@ -28,3 +28,5 @@
 2022-08-03 15:08:49 FATAL [executor-thread-0]: Exception: class java.nio.file.AccessDeniedException. The file Пустой.txt is not copied, there is no access,
 2022-08-03 15:09:44 FATAL [executor-thread-0]: Exception: class java.nio.file.AccessDeniedException. The file Пустой.txt is not copied, there is no access,
 2022-08-03 15:11:30 FATAL [executor-thread-0]: Exception: class java.nio.file.AccessDeniedException. The file Пустой.txt is not copied, there is no access,
+2022-08-08 13:41:27 FATAL [executor-thread-0]: Exception: class java.nio.file.AccessDeniedException. The file Пустой.txt is not copied, there is no access,
+2022-08-08 13:49:20 FATAL [executor-thread-0]: Exception: class java.nio.file.AccessDeniedException. The file Пустой.txt is not copied, there is no access,

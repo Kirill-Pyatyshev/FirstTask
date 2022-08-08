@@ -1,5 +1,6 @@
 package controller;
 
+
 import service.FileConverterService;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
@@ -26,6 +27,6 @@ public class ConverterController {
     @RolesAllowed({"user","admin"})
     public Response startOfConversion(@QueryParam String Parameter) {
         fileConverterService.startOfConversion(Parameter);
-        return Response.ok(fileConverterService).build();
+        return Response.ok(fileConverterService.getResultDTO()).build();
     }
 }

@@ -1,4 +1,3 @@
-/*
 package dto;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +10,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ConverterDTO {
+public class ConvertResultDTO {
     @Schema(description = "Путь до папки с входными файлами", example = "src\\test\\resources")
     private String pathInitialData;
     @Schema(description = "Путь до папки с результирующими файлами", example = "src\\test\\resources")
@@ -20,4 +19,4 @@ public class ConverterDTO {
     private int quantityProcessedFiles;
     @Schema(description = "Параметр")
     private String parameter;
-}*/
+}

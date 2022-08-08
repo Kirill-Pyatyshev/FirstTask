@@ -1,5 +1,6 @@
 package service;
 
+import dto.ConvertResultDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,10 +16,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @ApplicationScoped
 public class FileConverterService {
 
@@ -38,7 +35,7 @@ public class FileConverterService {
         quantityProcessedFiles = files.length;
         Arrays.stream(files).forEach(file -> {
             try {
-                Files.copy(file.toPath(), Path.of(pathModified,file.getName()), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(file.toPath(), Path.of(pathModified, file.getName()), StandardCopyOption.REPLACE_EXISTING);
                 convertAndSaveFile(file, parameter);
             } catch (AccessDeniedException e){
                 logger.fatal("Exception: " + e.getClass() + ". The file " + file.getName() + " is not copied, there is no access,");
@@ -59,9 +56,8 @@ public class FileConverterService {
                 characterСounter += lines.length();
                 characterCounterWithoutSpaces += lines.replace(" ","").length();
             }
-            FileWriter fileWriter = new FileWriter(Path.of(pathModified,file.getName()).toString(), true);
+            FileWriter fileWriter = new FileWriter(Path.of(pathModified, file.getName()).toString(), true);
             StringBuilder sb = new StringBuilder();
-
             sb.append("\n")
                     .append("Количетсво символов:")
                     .append(characterСounter)
@@ -76,5 +72,10 @@ public class FileConverterService {
         } catch (IOException e) {
             logger.fatal("Exception: " +e.getClass() + "Error when saving the file.");
         }
+    }
+
+    public ConvertResultDTO getResultDTO(){
+        ConvertResultDTO dto = new ConvertResultDTO(pathOriginal, pathModified, quantityProcessedFiles , parameter);
+        return dto;
     }
 }
