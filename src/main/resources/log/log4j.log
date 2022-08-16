@@ -1,2 +1,3 @@
-2022-08-08 15:21:11 FATAL [executor-thread-0]: Error: the file folder is empty!
-2022-08-08 15:21:50 INFO  [executor-thread-0]: Error: the file folder is empty!
+2022-08-16 19:29:41 INFO  [Camel (camel-13) thread #13 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: Война и мир.txt with parameter: das
+2022-08-16 19:29:41 INFO  [Camel (camel-13) thread #13 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: Пустой.txt with parameter: das
+2022-08-16 19:29:41 INFO  [Camel (camel-13) thread #13 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: У лукоморья дуб зелёный....txt with parameter: das
