@@ -1,3 +1,9 @@
 2022-08-16 19:29:41 INFO  [Camel (camel-13) thread #13 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: Война и мир.txt with parameter: das
 2022-08-16 19:29:41 INFO  [Camel (camel-13) thread #13 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: Пустой.txt with parameter: das
 2022-08-16 19:29:41 INFO  [Camel (camel-13) thread #13 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: У лукоморья дуб зелёный....txt with parameter: das
+2022-08-17 13:24:40 INFO  [Camel (camel-2) thread #1 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: Война и мир.txt with parameter: good
+2022-08-17 13:24:40 INFO  [Camel (camel-2) thread #1 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: Пустой.txt with parameter: good
+2022-08-17 13:24:40 INFO  [Camel (camel-2) thread #1 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: У лукоморья дуб зелёный....txt with parameter: good
+2022-08-17 14:03:45 INFO  [Camel (camel-5) thread #3 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: Война и мир.txt with parameter: qwerty
+2022-08-17 14:03:45 INFO  [Camel (camel-5) thread #3 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: Пустой.txt with parameter: qwerty
+2022-08-17 14:03:45 INFO  [Camel (camel-5) thread #3 - file://D:%5CJavaProject%5CFirstTaskv3%5Csrc%5Ctest%5Cresources%5CinitialData]: Processing file: У лукоморья дуб зелёный....txt with parameter: qwerty

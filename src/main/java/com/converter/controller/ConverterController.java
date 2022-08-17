@@ -24,7 +24,7 @@ public class ConverterController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed({"user","admin"})
-    public Response startOfConversion(@QueryParam String Parameter) {
-        return Response.ok(fileConverterService.startOfConversion(Parameter)).build();
+    public Response startOfConversion(@QueryParam String parameter) {
+        return Response.ok(fileConverterService.startOfConversion(parameter)).build();
     }
 }

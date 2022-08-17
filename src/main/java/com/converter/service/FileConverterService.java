@@ -31,27 +31,23 @@ public class FileConverterService {
                             .process(new Processor() {
                                 @Override
                                 public void process(Exchange exchange) throws Exception {
+                                    exchange.getIn().setBody(convertBody(exchange, parameter));
                                     ++quantityProcessedFiles;
                                 }
                             })
-                            .setHeader("parameter", constant(parameter))
-                            .bean(FileConverterService.class, "convertBody(${exchange},${header.parameter})")
                             .to("file:{{path.results}}");
                 }
             });
             camel.start();
-            Thread.sleep(3000);
+            Thread.sleep(2000);
             camel.close();
-
-        }catch (InterruptedException e) {
-            logger.fatal("Exception: " +e.getClass(), e);;
         } catch (Exception e) {
             logger.fatal("Exception: " +e.getClass(), e);
         }
         return new ConvertResultDTO(pathOriginal, pathModified, quantityProcessedFiles, parameter);
     }
 
-    public void convertBody(Exchange exchange, String parameter){
+    public String convertBody(Exchange exchange, String parameter){
         logger.info("Processing file: " + exchange.getIn().getHeader("CamelFileName") + " with parameter: " + parameter );
         String body = exchange.getMessage().getBody(String.class);
         int characterСounter = 0;
@@ -69,6 +65,6 @@ public class FileConverterService {
                 .append("\n")
                 .append("Параметр на вход RESTа:")
                 .append(parameter);
-        exchange.getIn().setBody(sb);
+        return sb.toString();
     }
 }
